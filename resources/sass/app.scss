@@ -6,3 +6,11 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+.comments img{
+    vertical-align: unset !important;
+}
+
+.btn.btn-success.btn-md{
+    float: right;
+}

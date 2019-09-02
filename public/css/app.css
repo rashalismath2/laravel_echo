@@ -10644,3 +10644,11 @@ a.text-dark:focus {
   }
 }
 
+.comments img {
+  vertical-align: unset !important;
+}
+
+.btn.btn-success.btn-md {
+  float: right;
+}
+

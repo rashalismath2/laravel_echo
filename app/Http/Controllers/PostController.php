@@ -13,7 +13,6 @@ class PostController extends Controller
     }
 
     public function index(Request $request,Post $post){
-        return view("post")->with('data',["post"=>$post
-                                            ,"comments"=>$post->comments()->with('user')->get()]);
+        return view("post")->with('post',$post);
     }
 }
