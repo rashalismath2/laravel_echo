@@ -1,7 +1,6 @@
 <template>
     <div class="container">
         <post v-bind:post="post" v-bind:user="user"></post>
-        {{user}}
     </div>
 </template>
 

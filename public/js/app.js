@@ -1845,7 +1845,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -1905,6 +1904,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -1919,24 +1922,36 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      commentBox: ''
+      commentBox: '',
+      comments: []
     };
   },
   created: function created() {
-    this.getComments;
+    this.getComments();
   },
   methods: {
-    getcomments: function getcomments() {
-      this.$http.get('/api/post/' + this.post.id + "/comment").then(function (response) {
+    getComments: function getComments() {
+      var _this = this;
+
+      axios.get('/api/post/' + this.post.id + "/comment?api_token=".concat(this.user.api_token)).then(function (response) {
+        _this.comments = response.data;
         console.log(response);
       })["catch"](function (error) {
         console.log("error " + error);
       });
     },
-    postcomments: function postcomments() {
-      this.$http.post("/api/post/".concat(this.post.id, "/comment"), {
+    postComments: function postComments() {
+      var _this2 = this;
+
+      axios.post("/api/post/".concat(this.post.id, "/comment"), {
         body: this.commentBox,
-        api_token: ''
+        api_token: this.user.api_token
+      }).then(function (response) {
+        _this2.comments.unshift(response.data[0]);
+
+        _this2.commentBox = "";
+      })["catch"](function (error) {
+        console.log("Error in submitting comment " + error);
       });
     }
   }
@@ -47491,10 +47506,7 @@ var render = function() {
   return _c(
     "div",
     { staticClass: "container" },
-    [
-      _c("post", { attrs: { post: _vm.post, user: _vm.user } }),
-      _vm._v("\n    " + _vm._s(_vm.user) + "\n")
-    ],
+    [_c("post", { attrs: { post: _vm.post, user: _vm.user } })],
     1
   )
 }
@@ -47573,21 +47585,50 @@ var render = function() {
             "button",
             {
               staticClass: "btn btn-success btn-md",
-              attrs: { type: "submit" }
+              attrs: { type: "submit" },
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  return _vm.postComments($event)
+                }
+              }
             },
             [_vm._v("Comment")]
           )
         ])
       ]),
       _vm._v(" "),
-      _c("img", {
-        staticStyle: { "vertical-align": "text-top" },
-        attrs: {
-          src: "https://img.icons8.com/bubbles/50/000000/see-male-account.png"
-        }
-      }),
-      _vm._v(" "),
-      _c("div", { staticClass: "card-text d-inline-block" })
+      _c(
+        "div",
+        { staticClass: "comments" },
+        _vm._l(_vm.comments, function(comment) {
+          return _c("div", { key: comment.id, staticClass: "comment mb-2" }, [
+            _c("img", {
+              staticStyle: { "vertical-align": "text-top" },
+              attrs: {
+                src:
+                  "https://img.icons8.com/bubbles/50/000000/see-male-account.png"
+              }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "card-text d-inline-block" }, [
+              _c("strong", [_vm._v(_vm._s(comment.user.name) + " Said..")]),
+              _vm._v(" "),
+              _c("p", { staticClass: "m-0 p-0" }, [
+                _vm._v(_vm._s(comment.body))
+              ]),
+              _vm._v(" "),
+              _c("span", [
+                _vm._v(
+                  "Commented on: " +
+                    _vm._s(new Date(comment.updated_at).toLocaleDateString())
+                )
+              ])
+            ])
+          ])
+        }),
+        0
+      )
     ])
   ])
 }
