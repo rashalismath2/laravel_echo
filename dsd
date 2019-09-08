@@ -1,0 +1,29 @@
+[33mcommit 3d6ad35b36841a15203badb5767fd0f3d8927d21[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: rashalismath2 <rashalismath@gmail.com>
+Date:   Tue Sep 3 22:44:53 2019 +0530
+
+    added comment functionality
+
+[33mcommit 100049e11cbd9a6b33c9e2d0750ecea3902f494a[m
+Author: rashalismath2 <rashalismath@gmail.com>
+Date:   Mon Sep 2 17:01:40 2019 +0530
+
+    added vuejs post component
+
+[33mcommit e769c57ab648112cd982d4674976715b53e89e4c[m
+Author: rashalismath2 <rashalismath@gmail.com>
+Date:   Thu Aug 29 22:26:24 2019 +0530
+
+    Created front end and API Routes
+
+[33mcommit c85ae11ff9e63cd90db418bc9f640171742d402f[m
+Author: rashalismath2 <rashalismath@gmail.com>
+Date:   Mon Aug 26 20:11:25 2019 +0530
+
+    pusher packages added and configured
+
+[33mcommit 3acfc0ece21f1bc7a954d989481ac63ab2469258[m
+Author: rashalismath2 <rashalismath@gmail.com>
+Date:   Mon Aug 26 18:19:54 2019 +0530
+
+    Installing laravel

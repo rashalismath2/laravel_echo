@@ -55,7 +55,17 @@
         created(){
             this.getComments()
         },
+        mounted(){
+            this.listen();
+        },
         methods:{
+            listen(){
+                Echo.channel('post.'+this.post.id)
+                .listen('NewComment',(comment)=>{
+                    console.log(comment);
+                    this.comments.unshift(comment);
+                })
+            },
             getComments(){
                 axios.get('/api/post/'+this.post.id+`/comment?api_token=${this.user.api_token}`).then((response)=>{
                     this.comments=response.data;
@@ -70,7 +80,7 @@
                     api_token:this.user.api_token
                 })
                 .then((response)=>{
-                    this.comments.unshift(response.data[0]);
+                    this.comments.unshift(response.data);
                     this.commentBox=""
                 })
                 .catch((error)=>{

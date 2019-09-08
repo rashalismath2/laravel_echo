@@ -1,17 +1,17 @@
 <template>
     <div class="container">
         <post v-bind:post="post" v-bind:user="user"></post>
+
     </div>
 </template>
 
 <script>
     import Post from './components/Post.vue'
  
-
     export default {
         components:{
-            'post':Post
-   
+            'post':Post,
+
         },     
         props:{
             user:{

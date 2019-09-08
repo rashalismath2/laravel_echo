@@ -1,8 +1,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Message;
 
-class CommentTableSeeder extends Seeder
+class MessageTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +12,6 @@ class CommentTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Comment::class,15)->create();
+        factory(App\Message::class,50)->create();
     }
 }

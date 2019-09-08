@@ -20,3 +20,5 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/post/{post}', 'PostController@index');
 
+Route::get('/messages', 'MessageController@index');
+

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Post;
 use App\Comment;
+use App\Events\NewComment;
 use App\Http\Requests\ValidatePost;
 
 class CommentController extends Controller
@@ -19,7 +20,9 @@ class CommentController extends Controller
                                         'user_id'=>auth()->user()->id,
                                         'post_id'=>$post->id]);
 
-        $comment=Comment::where('id',$comment->id)->with('user')->get();
+        $comment=Comment::where('id',$comment->id)->with('user')->first();
+
+        broadcast(new NewComment($comment))->toOthers();
 
         return $comment->toJson();
     }
